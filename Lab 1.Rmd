@@ -32,7 +32,7 @@ data2 <- data1 %>%
   ungroup() %>% 
   slice(1:25)
 
-plot 1 <- ggplot(data2, aes(x=fct_reorder(screen_name, n), y = n)) +
+plot1 <- ggplot(data2, aes(x=fct_reorder(screen_name, n), y = n)) +
   geom_col() +
   coord_flip()
 ```

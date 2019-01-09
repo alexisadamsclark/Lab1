@@ -19,6 +19,26 @@ list.files(here("data"))
 data <- import(here("data", "rstats_tweets (1).rds"))
 ```
 
+``` {r commit 2}
+head(data)
+names(data)
+
+data1 <- data %>% 
+  mutate(screen_name = as.factor(screen_name)) %>% 
+  group_by(screen_name) %>% 
+  count(screen_name, sort=TRUE)
+
+data2 <- data1 %>%
+  ungroup() %>% 
+  slice(1:25)
+
+
+ggplot(data2, aes(x=fct_reorder(screen_name, n), y=n)) +
+  geom_col() +
+  coord_flip()
+
+```
+
 ```{r Commit 4}
 #Create new dataset
 data4 <- data %>% 

@@ -1,6 +1,6 @@
 ---
 title: "Lab 1"
-author: "Alexis Adams-Clark"
+author: "Alexis Adams-Clark, Cianna Bedford-Petersen, Andrew Fridman, & Brendan Cullen"
 date: "1/9/2019"
 output: html_document
 ---
@@ -15,34 +15,37 @@ library(rio)
 library(tidyverse)
 
 #Import data
-list.files(here("data"))
+list.files(here())
 data <- import(here("data", "rstats_tweets (1).rds"))
 ```
 
-``` {r commit 2}
+```{r Commit 2}
+#View data
 head(data)
 names(data)
 
+#Create new dataset
 data1 <- data %>% 
-  mutate(screen_name = as.factor(screen_name)) %>% 
-  group_by(screen_name) %>% 
-  count(screen_name, sort = TRUE)
+                mutate(screen_name = as.factor(screen_name)) %>% 
+                group_by(screen_name) %>% 
+                count(screen_name, sort = TRUE)
 
+#Slice dataset
 data2 <- data1 %>%
-  ungroup() %>% 
-  slice(1:25)
+                 ungroup() %>% 
+                 slice(1:25)
 
+#Reproduce plot
 plot1 <- ggplot(data2, aes(x=fct_reorder(screen_name, n), y = n)) +
-  geom_col() +
-  coord_flip()
+                geom_col() +
+                coord_flip()
 ```
 
-```{r commit 3, fig.width = 10, fig.height = 10}
+```{r Commit 3, fig.width = 10, fig.height = 10}
 plotnew_1 <- ggplot(data2, aes(x=fct_reorder(screen_name, n), y=n)) +
-  geom_col(fill = "cornflowerblue") +
-  coord_flip() + 
-  theme_minimal(base_size = 15) + 
-
+                    geom_col(fill = "cornflowerblue") +
+                    coord_flip() + 
+                    theme_minimal(base_size = 15) + 
 ```
 
 ```{r Commit 4}
@@ -55,18 +58,20 @@ data4 <- data %>%
                 summarize(n = n())
 
 #Reproduce graph
-plot2 <- ggplot(data4, aes(x=month, y=n)) + 
+ggplot(data4, aes(x=month, y=n)) + 
        geom_line() +
        geom_smooth()
 ```
 
 ```{r Commit 5, fig.width = 10, fig.height = 10}
 # Make plot look better
-plotnew_2 <- ggplot(data4, aes(x = month, y = n)) +
-  geom_line(color = "gray40", size = 1) +
-  geom_smooth(color = "magenta") +
-  geom_area(alpha = 0.3, fill = "cornflowerblue") +
-  labs(x = "Year (data summarized by month)", y = "Number of #rstats tweets", title = "Growth of the #rstats hashtag on twitter over time") +
-  theme_minimal(base_size = 15) # theme_minimal and increase base size
+ggplot(data4, aes(x = month, y = n)) +
+       geom_line(color = "gray40", size = 1) +
+       geom_smooth(color = "magenta") +
+       geom_area(alpha = 0.3, fill = "cornflowerblue") +
+       labs(x = "Year (data summarized by month)", 
+            y = "Number of #rstats tweets", 
+            title = "Growth of the #rstats hashtag on twitter over time") +
+       theme_minimal(base_size = 15) # theme_minimal and increase base size
 ```
 

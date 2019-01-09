@@ -7,7 +7,9 @@ output: html_document
 
 ```{r setup, include=FALSE}
 #Load libraries
+library(dplyr)
 library(here)
+library(lubridate)
 library(psych)
 library(rio)
 library(tidyverse)
@@ -15,8 +17,19 @@ library(tidyverse)
 #Import data
 list.files(here("data"))
 data <- import(here("data", "rstats_tweets (1).rds"))
-
-
-
 ```
 
+```{r Commit 4, include=FALSE}
+#Create new dataset
+data4 <- data %>% 
+                select(created_at) %>% 
+                mutate(month = round_date(created_at, "month")) %>% 
+                filter(month < as_datetime("2019-01-01 00:00:00")) %>% 
+                group_by(month) %>% 
+                summarize(n = n())
+
+#Reproduce graph
+ggplot(data4, aes(x=month, y=n)) + 
+       geom_line() +
+       geom_smooth()
+```

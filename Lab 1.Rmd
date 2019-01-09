@@ -15,7 +15,7 @@ library(rio)
 library(tidyverse)
 
 #Import data
-list.files(here())
+list.files(here("data"))
 data <- import(here("data", "rstats_tweets (1).rds"))
 ```
 
@@ -45,7 +45,7 @@ plot1 <- ggplot(data2, aes(x=fct_reorder(screen_name, n), y = n)) +
 plotnew_1 <- ggplot(data2, aes(x=fct_reorder(screen_name, n), y=n)) +
                     geom_col(fill = "cornflowerblue") +
                     coord_flip() + 
-                    theme_minimal(base_size = 15) + 
+                    theme_minimal(base_size = 15)
 ```
 
 ```{r Commit 4}

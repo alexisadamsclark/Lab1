@@ -6,8 +6,13 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
+#Load libraries
 library(here)
+library(psych)
 library(rio)
+library(tidyverse)
+
+#Import data
 list.files(here("data"))
 data <- import(here("data", "rstats_tweets (1).rds"))
 

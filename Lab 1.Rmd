@@ -19,7 +19,7 @@ list.files(here("data"))
 data <- import(here("data", "rstats_tweets (1).rds"))
 ```
 
-```{r Commit 4, include=FALSE}
+```{r Commit 4}
 #Create new dataset
 data4 <- data %>% 
                 select(created_at) %>% 

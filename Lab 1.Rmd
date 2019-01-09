@@ -1,0 +1,15 @@
+---
+title: "Lab 1"
+author: "Alexis Adams-Clark"
+date: "1/9/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(here)
+library(rio)
+list.files(here("data"))
+data <- import(here("data", "rstats_tweets (1).rds"))
+
+```
+

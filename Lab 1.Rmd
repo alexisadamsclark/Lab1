@@ -29,7 +29,18 @@ data4 <- data %>%
                 summarize(n = n())
 
 #Reproduce graph
-ggplot(data4, aes(x=month, y=n)) + 
+plot <- ggplot(data4, aes(x=month, y=n)) + 
        geom_line() +
        geom_smooth()
 ```
+
+```{r Commit 5, fig.width = 10, fig.height = 10}
+# Make plot look better
+plot_new <- ggplot(data4, aes(x = month, y = n)) +
+  geom_line(color = "gray40", size = 1) +
+  geom_smooth(color = "magenta") +
+  geom_area(alpha = 0.3, fill = "cornflowerblue") +
+  labs(x = "Year (data summarized by month)", y = "Number of #rstats tweets", title = "Growth of the #rstats hashtag on twitter over time") +
+  theme_minimal(base_size = 15) # theme_minimal and increase base size
+```
+
